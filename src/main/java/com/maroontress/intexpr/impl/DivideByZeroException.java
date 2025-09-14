@@ -5,4 +5,9 @@ package com.maroontress.intexpr.impl;
     to divide an integer value by zero.
 */
 public final class DivideByZeroException extends RuntimeException {
+    /**
+        Constructs a new instance.
+    */
+    public DivideByZeroException() {
+    }
 }
