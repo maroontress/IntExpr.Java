@@ -95,8 +95,8 @@ public final class Compiler {
         return (c, token) -> {
             var maybeOperator = Operator.of(token, type);
             if (maybeOperator.isEmpty()) {
-                throw new IllegalArgumentException(
-                        Messages.of(token, "unknown operator"));
+                var m = Messages.of(token, "unknown " + type + " operator");
+                throw new IllegalArgumentException(m);
             }
             c.pushOperator(maybeOperator.get());
         };
