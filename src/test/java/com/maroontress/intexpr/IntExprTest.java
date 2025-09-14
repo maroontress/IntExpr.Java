@@ -298,4 +298,56 @@ public final class IntExprTest {
         }
         throw new AssertionError();
     }
+
+    @Test
+    public void noRightOperandWithBinaryOperator() {
+        var expr = "1+";
+        //          12
+        try {
+            IntExpr.eval(expr);
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("L1:2: operand is missing: \"+\""));
+            return;
+        }
+        throw new AssertionError();
+    }
+
+    @Test
+    public void noOperandWithUnaryOperator() {
+        var expr = "-";
+        //          1
+        try {
+            IntExpr.eval(expr);
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("L1:1: operand is missing: \"-\""));
+            return;
+        }
+        throw new AssertionError();
+    }
+
+    @Test
+    public void unknownUnaryOperator() {
+        var expr = "*";
+        //          1
+        try {
+            IntExpr.eval(expr);
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("L1:1: unknown UNARY operator: \"*\""));
+            return;
+        }
+        throw new AssertionError();
+    }
+
+    @Test
+    public void unknownBinaryOperator() {
+        var expr = "1!";
+        //          12
+        try {
+            IntExpr.eval(expr);
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("L1:2: unknown BINARY operator: \"!\""));
+            return;
+        }
+        throw new AssertionError();
+    }
 }

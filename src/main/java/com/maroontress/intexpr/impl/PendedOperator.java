@@ -86,7 +86,7 @@ public interface PendedOperator {
 
             @Override
             public Token getToken() {
-                throw new IllegalStateException();
+                return operator.getToken();
             }
         };
     }

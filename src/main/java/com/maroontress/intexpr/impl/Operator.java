@@ -43,6 +43,10 @@ public final class Operator implements Instruction {
         return spec;
     }
 
+    public Token getToken() {
+        return token;
+    }
+
     /** {@inheritDoc} */
     @Override
     public void accept(Deque<SyntaxNode> stack) {

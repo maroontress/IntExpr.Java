@@ -19,6 +19,10 @@ public interface IntBinaryOperation extends Operation {
     @Override
     default Executable toExecutable() {
         return (s, n, t) -> {
+            if (n < 2) {
+                var m = Messages.of(t, "operand is missing");
+                throw new IllegalArgumentException(m);
+            }
             var k = n - 1;
             var left = s[k - 1];
             var right = s[k];
