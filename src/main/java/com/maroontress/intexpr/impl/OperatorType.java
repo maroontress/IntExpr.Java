@@ -12,13 +12,16 @@ import com.maroontress.intexpr.syntaxtree.UnaryOperatorNode;
 */
 public enum OperatorType {
 
+    // CSOFF: NeedBraces
     /** Represents unary operators. */
     UNARY(o -> s -> {
         var operand = s.pop();
         var node = new UnaryOperatorNode(o, operand);
         s.push(node);
     }),
+    // CSON: NeedBraces
 
+    // CSOFF: NeedBraces
     /** Represents binary operators. */
     BINARY(o -> s -> {
         var right = s.pop();
@@ -26,6 +29,7 @@ public enum OperatorType {
         var node = new BinaryOperatorNode(o, left, right);
         s.push(node);
     });
+    // CSON: NeedBraces
 
     private final Function<Opcode, Consumer<Deque<SyntaxNode>>> f;
 
