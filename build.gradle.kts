@@ -16,7 +16,7 @@ plugins {
 }
 
 group = "com.maroontress"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     // Use Maven Central for resolving dependencies.
