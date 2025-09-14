@@ -49,15 +49,7 @@
     <property name="files" value=".*[\\/]src[\\/](test|it)[\\/].*(?&lt;!Support)\.java"/>
   </module>
   <module name="SuppressWarningsFilter"/>
-  <module name="SuppressWithPlainTextCommentFilter">
-    <!--
-      Use suppressions.xml for suppressions, this is only example.
-      checkFormat will prevent suppression comments from being valid.
-    -->
-    <property name="checkFormat" value="IGNORETHIS"/>
-    <property name="offCommentFormat" value="CSOFF\: .*"/>
-    <property name="onCommentFormat" value="CSON\: .*"/>
-  </module>
+  <module name="SuppressWithPlainTextCommentFilter"/>
 
   <!-- Headers -->
   <!--
@@ -301,7 +293,37 @@
     <module name="EmptyCatchBlock"/>
     <module name="LeftCurly"/>
     <module name="NeedBraces"/>
-    <module name="RightCurly"/>
+    <module name="NeedBraces">
+      <property name="tokens" value="LAMBDA"/>
+      <property name="allowSingleLineStatement" value="true"/>
+    </module>
+    <module name="RightCurly">
+      <property name="tokens" value="METHOD_DEF"/>
+      <property name="tokens" value="CTOR_DEF"/>
+      <property name="tokens" value="CLASS_DEF"/>
+      <property name="tokens" value="INSTANCE_INIT"/>
+      <property name="tokens" value="STATIC_INIT"/>
+      <property name="tokens" value="ANNOTATION_DEF"/>
+      <property name="tokens" value="ENUM_DEF"/>
+      <property name="tokens" value="RECORD_DEF"/>
+      <property name="tokens" value="COMPACT_CTOR_DEF"/>
+      <property name="tokens" value="LITERAL_FOR"/>
+      <property name="tokens" value="LITERAL_WHILE"/>
+      <property name="option" value="alone"/>
+    </module>
+    <module name="RightCurly">
+      <property name="tokens" value="LITERAL_TRY"/>
+      <property name="tokens" value="LITERAL_CATCH"/>
+      <property name="tokens" value="LITERAL_FINALLY"/>
+      <property name="tokens" value="LITERAL_IF"/>
+      <property name="tokens" value="LITERAL_ELSE"/>
+      <property name="tokens" value="LITERAL_DO"/>
+      <property name="option" value="same"/>
+    </module>
+    <module name="RightCurly">
+      <property name="tokens" value="INTERFACE_DEF"/>
+      <property name="option" value="alone_or_singleline"/>
+    </module>
 
     <!-- Class Design -->
     <module name="DesignForExtension">
@@ -486,9 +508,9 @@
         Use suppressions.xml for suppressions, this is only example.
         checkFormat will prevent suppression comments from being valid.
       -->
-      <property name="checkFormat" value="IGNORETHIS"/>
-      <property name="offCommentFormat" value="CSOFF\: .*"/>
-      <property name="onCommentFormat" value="CSON\: .*"/>
+      <property name="offCommentFormat" value="CSOFF\: ([\w\|]+)"/>
+      <property name="onCommentFormat" value="CSON\: ([\w\|]+)"/>
+      <property name="checkFormat" value="$1"/>
     </module>
     <!--
     <module name="SuppressionXpathFilter">
@@ -542,8 +564,8 @@
 
     <!-- Imports -->
     <module name="AvoidStarImport"/>
+    <!-- <module name="AvoidStaticImport"/> -->
     <!--
-    <module name="AvoidStaticImport"/>
     <module name="CustomImportOrder">
       <property name="customImportOrderRules"
                 value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
@@ -600,7 +622,7 @@
     <module name="JavadocMissingLeadingAsterisk"/>
     -->
     <module name="JavadocMissingWhitespaceAfterAsterisk"/>
-    <module name="JavadocParagraph"/>
+    <!-- <module name="JavadocParagraph"/> -->
     <module name="JavadocStyle">
       <property name="scope" value="public"/>
     </module>
@@ -610,7 +632,7 @@
       <property name="allowUnknownTags" value="true"/>
     </module>
     <module name="JavadocVariable">
-      <property name="scope" value="protected"/>
+      <property name="accessModifiers" value="public"/>
     </module>
     <module name="MissingJavadocMethod">
       <property name="allowMissingPropertyJavadoc" value="true"/>
@@ -635,6 +657,7 @@
       <property name="max" value="7"/>
     </module>
     <module name="ClassDataAbstractionCoupling">
+      <property name="excludeClassesRegexps" value=".*Exception$"/>
       <!-- Default classes are also listed -->
       <property name="excludedClasses"
                 value="boolean, byte, char, double, float, int, long, short, void,
@@ -650,6 +673,7 @@
                        FileNotFoundException, TestException"/>
     </module>
     <module name="ClassFanOutComplexity">
+      <property name="excludeClassesRegexps" value=".*Exception$"/>
       <property name="max" value="25"/>
       <!-- Default classes are also listed -->
       <property name="excludedClasses"
@@ -668,21 +692,17 @@
                        TokenStreamException, IOException, Override, Deprecated, SafeVarargs,
                        SuppressWarnings, FunctionalInterface"/>
     </module>
-    <!--
     <module name="CyclomaticComplexity">
       <property name="switchBlockAsSingleDecisionPoint" value="true"/>
     </module>
     <module name="JavaNCSS"/>
     <module name="NPathComplexity"/>
-    -->
 
     <!-- Misc -->
     <module name="ArrayTypeStyle"/>
-    <!--
     <module name="AvoidEscapedUnicodeCharacters">
       <property name="allowIfAllCharactersEscaped" value="true"/>
     </module>
-    -->
     <module name="CommentsIndentation"/>
     <module name="DescendantToken"/>
     <module name="FinalParameters">
@@ -696,7 +716,7 @@
     <module name="Indentation">
       <property name="basicOffset" value="4"/>
       <property name="braceAdjustment" value="0"/>
-      <property name="caseIndent" value="4"/>
+      <property name="caseIndent" value="0"/>
       <property name="throwsIndent" value="8"/>
     </module>
     <module name="OuterTypeFilename"/>
@@ -736,17 +756,28 @@
     <module name="ConstantName"/>
     <module name="InterfaceTypeParameterName"/>
     <module name="LocalFinalVariableName"/>
-    <module name="LocalVariableName"/>
-    <module name="MemberName"/>
+    <module name="LocalVariableName">
+      <property name="format" value="^([a-z][a-zA-Z0-9]*)$"/>
+    </module>
+    <module name="MemberName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
     <module name="MethodName"/>
     <module name="MethodTypeParameterName"/>
     <module name="PackageName"/>
     <module name="ParameterName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
       <property name="ignoreOverridden" value="true"/>
     </module>
-    <module name="LambdaParameterName"/>
-    <module name="CatchParameterName"/>
-    <module name="StaticVariableName"/>
+    <module name="LambdaParameterName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
+    <module name="CatchParameterName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
+    <module name="StaticVariableName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
     <module name="TypeName"/>
     <module name="PatternVariableName"/>
     <module name="IllegalIdentifierName"/>

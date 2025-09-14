@@ -25,6 +25,7 @@ public final class BinaryOperatorNode implements SyntaxNode {
         this.rightOperand = rightOperand;
     }
 
+    // CSOFF: AvoidEscapedUnicodeCharacters
     /** {@inheritDoc} */
     @Override
     public String toString(String firstIndent, String indent) {
@@ -37,4 +38,5 @@ public final class BinaryOperatorNode implements SyntaxNode {
                 + leftOperand.toString(verticalRight, vertical) + lf
                 + rightOperand.toString(upRight, blank);
     }
+    // CSON: AvoidEscapedUnicodeCharacters
 }

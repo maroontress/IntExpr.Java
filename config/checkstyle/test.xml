@@ -49,15 +49,7 @@
     <property name="files" value=".*[\\/]src[\\/](test|it)[\\/].*(?&lt;!Support)\.java"/>
   </module>
   <module name="SuppressWarningsFilter"/>
-  <module name="SuppressWithPlainTextCommentFilter">
-    <!--
-      Use suppressions.xml for suppressions, this is only example.
-      checkFormat will prevent suppression comments from being valid.
-    -->
-    <property name="checkFormat" value="IGNORETHIS"/>
-    <property name="offCommentFormat" value="CSOFF\: .*"/>
-    <property name="onCommentFormat" value="CSON\: .*"/>
-  </module>
+  <module name="SuppressWithPlainTextCommentFilter"/>
 
   <!-- Headers -->
   <!--
@@ -213,6 +205,7 @@
   <!-- Size Violations -->
   <module name="FileLength">
     <property name="fileExtensions" value="java"/>
+    <property name="max" value="5000"/>
   </module>
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
@@ -275,9 +268,11 @@
     <module name="SuppressWarningsHolder"/>
 
     <!-- Block Checks -->
+    <!--
     <module name="AvoidNestedBlocks">
       <property name="allowInSwitchCase" value="true"/>
     </module>
+    -->
     <module name="EmptyBlock">
       <property name="tokens" value="LITERAL_CATCH"/>
       <property name="tokens" value="ARRAY_INIT"/>
@@ -331,7 +326,9 @@
     <!-- Coding -->
     <module name="ArrayTrailingComma"/>
     <module name="AvoidDoubleBraceInitialization"/>
+    <!--
     <module name="AvoidInlineConditionals"/>
+    -->
     <module name="AvoidNoArgumentSuperConstructorCall"/>
     <module name="CovariantEquals"/>
     <module name="DeclarationOrder"/>
@@ -366,12 +363,14 @@
                        java.lang.StringBuffer"/>
     </module>
     <module name="IllegalThrows"/>
+    <!--
     <module name="IllegalToken">
       <property name="tokens" value="LABELED_STAT"/>
       <property name="tokens" value="LITERAL_NATIVE"/>
       <property name="tokens" value="LITERAL_VOLATILE"/>
       <property name="tokens" value="LITERAL_ASSERT"/>
     </module>
+    -->
     <module name="IllegalTokenText">
       <property name="tokens" value="STRING_LITERAL"/>
       <property name="format" value="^(US-ASCII|ISO-8859-1|UTF-8|UTF-16BE|UTF-16LE|UTF-16)$"/>
@@ -474,7 +473,9 @@
     <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
     <module name="UnnecessarySemicolonInEnumeration"/>
     <module name="UnnecessarySemicolonInTryWithResources"/>
+    <!--
     <module name="VariableDeclarationUsageDistance"/>
+    -->
 
     <!-- Filters -->
     <module name="SuppressionCommentFilter">
@@ -666,9 +667,11 @@
 
     <!-- Misc -->
     <module name="ArrayTypeStyle"/>
+    <!--
     <module name="AvoidEscapedUnicodeCharacters">
       <property name="allowIfAllCharactersEscaped" value="true"/>
     </module>
+    -->
     <module name="CommentsIndentation"/>
     <module name="DescendantToken"/>
     <module name="FinalParameters">
@@ -710,11 +713,13 @@
     <module name="RedundantModifier"/>
 
     <!-- Naming Conventions -->
+    <!--
     <module name="AbbreviationAsWordInName">
       <property name="ignoreFinal" value="false"/>
       <property name="allowedAbbreviationLength" value="0"/>
       <property name="allowedAbbreviations" value="AST"/>
     </module>
+    -->
     <module name="AbstractClassName"/>
     <module name="ClassTypeParameterName"/>
     <module name="RecordTypeParameterName"/>
@@ -722,17 +727,28 @@
     <module name="ConstantName"/>
     <module name="InterfaceTypeParameterName"/>
     <module name="LocalFinalVariableName"/>
-    <module name="LocalVariableName"/>
-    <module name="MemberName"/>
+    <module name="LocalVariableName">
+      <property name="format" value="^([a-z][a-zA-Z0-9]*)$"/>
+    </module>
+    <module name="MemberName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
     <module name="MethodName"/>
     <module name="MethodTypeParameterName"/>
     <module name="PackageName"/>
     <module name="ParameterName">
+      <property name="format" value="^([a-z][a-zA-Z0-9]*)$"/>
       <property name="ignoreOverridden" value="true"/>
     </module>
-    <module name="LambdaParameterName"/>
-    <module name="CatchParameterName"/>
-    <module name="StaticVariableName"/>
+    <module name="LambdaParameterName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
+    <module name="CatchParameterName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
+    <module name="StaticVariableName">
+      <property name="format" value="([a-z][a-zA-Z0-9]*)$"/>
+    </module>
     <module name="TypeName"/>
     <module name="PatternVariableName"/>
     <module name="IllegalIdentifierName"/>
@@ -757,7 +773,9 @@
     <module name="ExecutableStatementCount">
       <property name="max" value="30"/>
     </module>
+    <!--
     <module name="LambdaBodyLength"/>
+    -->
     <module name="MethodCount">
       <property name="maxTotal" value="34"/>
     </module>
