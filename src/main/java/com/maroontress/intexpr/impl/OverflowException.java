@@ -5,4 +5,9 @@ package com.maroontress.intexpr.impl;
     operation results in an overflow.
 */
 public final class OverflowException extends RuntimeException {
+    /**
+        Constructs a new instance.
+    */
+    public OverflowException() {
+    }
 }

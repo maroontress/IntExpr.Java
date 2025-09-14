@@ -43,6 +43,11 @@ public final class Operator implements Instruction {
         return spec;
     }
 
+    /**
+        Returns the token of this operator.
+
+        @return The token.
+    */
     public Token getToken() {
         return token;
     }
